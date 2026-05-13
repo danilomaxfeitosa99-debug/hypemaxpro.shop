@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cozinha Brasile</title>
+  <meta name="description" content="Cozinha Brasile: apresentação institucional da empresa, dados cadastrais, base legal e informações de contato em São Paulo - SP.">
+  <style>
+    :root {
+      --bg: #f5f2ed;
+      --surface: #fffdfb;
+      --ink: #231c18;
+      --muted: #665a4e;
+      --line: #ddd2c6;
+      --accent: #8c4829;
+      --accent-soft: #f3e4d8;
+      --shadow: 0 16px 40px rgba(35, 28, 24, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #faf8f4 0%, var(--bg) 100%);
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(102, 90, 78, 0.12);
+    }
+    .topbar-inner {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .brand-mark {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #8c4829, #61311a);
+      color: #fff7f1;
+      font-weight: 800;
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+    .brand-copy strong,
+    .brand-copy span { display: block; }
+    .brand-copy strong { font-size: 1rem; letter-spacing: 0.01em; }
+    .brand-copy span { color: var(--muted); font-size: 0.82rem; }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .nav a:hover,
+    .nav a:focus-visible { color: var(--accent); }
+    .hero { padding: 44px 0 20px; }
+    .hero-card,
+    .card,
+    .footer-wrap {
+      background: var(--surface);
+      border: 1px solid rgba(102, 90, 78, 0.12);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+    .hero-card { padding: 36px 34px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      max-width: 11ch;
+    }
+    .hero-card p {
+      margin: 18px 0 0;
+      max-width: 64ch;
+      color: #40362e;
+      font-size: 1.04rem;
+    }
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .point {
+      padding: 18px;
+      border-radius: 20px;
+      background: #faf5ef;
+      border: 1px solid rgba(102, 90, 78, 0.1);
+    }
+    .point strong { display: block; margin-bottom: 6px; font-size: 0.98rem; }
+    .point span { display: block; color: var(--muted); font-size: 0.92rem; }
+    section { padding: 22px 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+    .section-head h2 { font-size: clamp(1.9rem, 3vw, 3rem); }
+    .section-head p { margin: 0; color: var(--muted); }
+    .about-grid,
+    .services-grid,
+    .contact-grid,
+    .footer-top,
+    .fiscal { display: grid; gap: 20px; }
+    .about-grid,
+    .contact-grid,
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .about-copy,
+    .about-notes,
+    .contact-panel,
+    .identity-panel { padding: 28px; }
+    .about-copy p,
+    .about-notes p,
+    .contact-panel p,
+    .identity-panel p {
+      margin: 0 0 16px;
+      color: #40362e;
+    }
+    .about-copy p:last-child,
+    .about-notes p:last-child,
+    .contact-panel p:last-child,
+    .identity-panel p:last-child { margin-bottom: 0; }
+    .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .service-card { padding: 24px 22px; }
+    .service-index {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .service-card h3 { font-size: 1.16rem; margin-bottom: 10px; }
+    .service-card p { margin: 0; color: var(--muted); }
+    .detail-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .detail {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: #faf5ef;
+      border: 1px solid rgba(102, 90, 78, 0.1);
+    }
+    .detail strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+    .detail span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+      word-break: break-word;
+    }
+    .cta-band {
+      margin: 6px 0 4px;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #492616, #7e4125 55%, #a76138 100%);
+      color: #fff8f1;
+      box-shadow: var(--shadow);
+    }
+    .cta-band strong {
+      display: block;
+      font-size: 1.18rem;
+      margin-bottom: 6px;
+    }
+    .cta-band p {
+      margin: 0;
+      color: rgba(255, 248, 241, 0.84);
+    }
+    footer { padding: 0 0 40px; }
+    .footer-wrap {
+      padding: 30px;
+      background: #201915;
+      color: #f9efe7;
+    }
+    .footer-top {
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(249, 239, 231, 0.12);
+    }
+    .footer-top p {
+      margin: 10px 0 0;
+      color: rgba(249, 239, 231, 0.76);
+      max-width: 60ch;
+    }
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      align-content: start;
+    }
+    .footer-links a:hover,
+    .footer-links a:focus-visible { color: #ffd7bf; }
+    .fiscal {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 22px;
+    }
+    .fiscal-box {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(249, 239, 231, 0.08);
+    }
+    .fiscal-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+    }
+    .fiscal-box span {
+      display: block;
+      color: rgba(249, 239, 231, 0.78);
+      font-size: 0.93rem;
+    }
+    @media (max-width: 960px) {
+      .section-head,
+      .about-grid,
+      .contact-grid,
+      .footer-top,
+      .services-grid,
+      .fiscal,
+      .hero-points { grid-template-columns: 1fr; }
+      .topbar-inner {
+        min-height: auto;
+        padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 20px, 1120px); }
+      .hero-card,
+      .about-copy,
+      .about-notes,
+      .contact-panel,
+      .identity-panel,
+      .footer-wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .nav { font-size: 0.86rem; }
+      .footer-links { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Ir para o início">
+        <div class="brand-mark" aria-hidden="true">CBR</div>
+        <div class="brand-copy">
+          <strong>Cozinha Brasile</strong>
+          <span>Apresentação institucional da empresa</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre Nós</a>
+        <a href="#servicos">Produtos/Serviços</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <div class="hero-card">
+          <span class="eyebrow">Presença institucional</span>
+          <h1>Conteúdo claro para apresentar a empresa com contexto, identificação e base legal.</h1>
+          <p>
+            A Cozinha Brasile utiliza sua presença digital para reunir informações institucionais,
+            identificação comercial e dados empresariais em um ambiente direto, estável e de navegação
+            simples.
+          </p>
+          <p>
+            A estrutura desta página foi organizada para evitar conteúdo superficial, reforçar a
+            associação entre marca e operação e manter visíveis os elementos fundamentais de confiança,
+            como razão social, CNPJ, endereço e documentos legais.
+          </p>
+          <div class="hero-points">
+            <div class="point">
+              <strong>Marca identificada</strong>
+              <span>Header com nome da empresa, navegação principal e leitura imediata da organização.</span>
+            </div>
+            <div class="point">
+              <strong>Conteúdo suficiente</strong>
+              <span>Texto institucional distribuído por seções, evitando a percepção de thin content.</span>
+            </div>
+            <div class="point">
+              <strong>Base jurídica visível</strong>
+              <span>Links legais funcionais e rodapé fiscal completo com texto real.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Sobre Nós</h2>
+          <p>
+            Em vez de uma página curta e genérica, a proposta desta estrutura é explicar a empresa,
+            citar sua base em São Paulo e apresentar sua operação com mais clareza e coerência.
+          </p>
+        </div>
+        <div class="about-grid">
+          <article class="card about-copy">
+            <p>
+              A Cozinha Brasile, inscrita no CNPJ 65.294.584/0001-09, é uma empresa brasileira
+              legalmente constituída, com endereço em São Paulo - SP. Sua presença digital é utilizada
+              para apresentar a organização, sua identificação comercial e suas informações
+              institucionais básicas.
+            </p>
+            <p>
+              O site foi pensado para centralizar dados da empresa em um único ambiente, com navegação
+              simples, texto objetivo e elementos de confiança visíveis desde o primeiro acesso. Em vez
+              de depender de recursos visuais desnecessários, a página prioriza clareza e consistência
+              entre domínio, empresa e base cadastral.
+            </p>
+            <p>
+              O objetivo é oferecer uma experiência institucional estável, na qual o visitante encontre a
+              empresa identificada corretamente, com dados reais, conteúdo legível e acesso facilitado às
+              páginas legais relacionadas à operação digital da organização.
+            </p>
+          </article>
+          <aside class="card about-notes">
+            <p>
+              A arquitetura desta página foi organizada para reforçar identidade, previsibilidade e
+              coerência entre marca, operação e documentação institucional.
+            </p>
+            <p>
+              Isso ajuda a compor uma apresentação mais completa da empresa, sem redirecionamentos
+              automáticos, sem scripts ocultos e sem mecanismos que prejudiquem a navegação do usuário.
+            </p>
+            <p>
+              O resultado é um ambiente leve, responsivo e de leitura direta, com cabeçalho de confiança,
+              corpo textual suficiente e rodapé fiscal completo.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Produtos/Serviços</h2>
+          <p>
+            Como esta é uma página institucional, esta seção organiza a função central do site e a forma
+            como a empresa se apresenta digitalmente.
+          </p>
+        </div>
+        <div class="services-grid">
+          <article class="card service-card">
+            <span class="service-index">01</span>
+            <h3>Apresentação empresarial</h3>
+            <p>
+              O site reúne o nome comercial da empresa, seus dados cadastrais e os principais elementos
+              de identificação da operação.
+            </p>
+          </article>
+          <article class="card service-card">
+            <span class="service-index">02</span>
+            <h3>Comunicação clara</h3>
+            <p>
+              O conteúdo foi estruturado para ser objetivo, legível e suficiente, evitando páginas
+              superficiais ou excessivamente promocionais.
+            </p>
+          </article>
+          <article class="card service-card">
+            <span class="service-index">03</span>
+            <h3>Base legal acessível</h3>
+            <p>
+              Política de Privacidade, Termos de Uso, Aviso Legal e Política de Reembolso/Devolução ficam
+              disponíveis para consulta permanente.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="wrap">
+        <div class="cta-band">
+          <strong>Empresa identificada, navegação previsível e documentação legal acessível.</strong>
+          <p>
+            A estrutura foi criada para apresentar a Cozinha Brasile com clareza e manter associação
+            direta entre marca, endereço e operação empresarial.
+          </p>
+        </div>
+        <div class="contact-grid">
+          <div class="card contact-panel">
+            <h2>Contato e identificação</h2>
+            <div class="detail-list">
+              <div class="detail">
+                <strong>Marca utilizada</strong>
+                <span>Cozinha Brasile</span>
+              </div>
+              <div class="detail">
+                <strong>Razão social</strong>
+                <span>Cozinha Brasile</span>
+              </div>
+              <div class="detail">
+                <strong>Endereço empresarial</strong>
+                <span>Avenida Salvador Jorge Velho 905, Parque Sao Rafael, São Paulo - SP, 08310-480</span>
+              </div>
+            </div>
+          </div>
+          <div class="card identity-panel">
+            <h2>Base institucional</h2>
+            <div class="detail-list">
+              <div class="detail">
+                <strong>CNPJ</strong>
+                <span>65.294.584/0001-09</span>
+              </div>
+              <div class="detail">
+                <strong>Cidade sede</strong>
+                <span>São Paulo - SP</span>
+              </div>
+              <div class="detail">
+                <strong>Documentos legais</strong>
+                <span>Política de Privacidade, Termos de Uso, Aviso Legal e Política de Reembolso/Devolução.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-wrap">
+      <div class="footer-top">
+        <div>
+          <strong>Cozinha Brasile</strong>
+          <p>
+            Página institucional desenvolvida para reunir identificação empresarial, base cadastral e
+            documentos legais em um único ambiente de navegação simples e estável.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Links legais">
+          <a href="privacy.html">Política de Privacidade</a>
+          <a href="terms.html">Termos de Uso</a>
+          <a href="disclaimer.html">Aviso Legal</a>
+          <a href="refund.html">Política de Reembolso/Devolução</a>
+        </nav>
+      </div>
+      <div class="fiscal">
+        <div class="fiscal-box">
+          <strong>Razão social completa</strong>
+          <span>Cozinha Brasile</span>
+        </div>
+        <div class="fiscal-box">
+          <strong>CNPJ</strong>
+          <span>65.294.584/0001-09</span>
+        </div>
+        <div class="fiscal-box">
+          <strong>Endereço completo</strong>
+          <span>Avenida Salvador Jorge Velho 905, Parque Sao Rafael, São Paulo - SP, 08310-480</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
